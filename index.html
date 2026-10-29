@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torres Fran | Sistemas Web y Soluciones Digitales para Comercios</title>
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #090a0f;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+        
+        /* Patrón de puntos de alta gama */
+        .bg-dot-pattern {
+            background-image: radial-gradient(rgba(245, 158, 11, 0.08) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        /* Animación de entrada inicial */
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Efecto Spotlight Premium para tarjetas */
+        .spotlight-card {
+            position: relative;
+            background: linear-gradient(180deg, rgba(20, 24, 38, 0.7) 0%, rgba(13, 16, 26, 0.9) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.12);
+            transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+        }
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(245, 158, 11, 0.15), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 1;
+            border-radius: inherit;
+        }
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
+        .spotlight-card:hover {
+            border-color: rgba(245, 158, 11, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(245, 158, 11, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased bg-dot-pattern selection:bg-amber-400 selection:text-slate-950">
+
+    <!-- Glow ambiental superior -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-amber-500/10 blur-[140px] pointer-events-none rounded-full z-0"></div>
+
+    <!-- Navegación -->
+    <nav class="fixed top-0 w-full bg-[#090a0f]/80 backdrop-blur-xl z-[100] border-b border-amber-500/10 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center relative z-10">
+            <!-- Logo isotipo de código -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 font-mono font-bold text-sm shadow-inner transition-transform hover:scale-105">
+                    &lt;/&gt;
+                </div>
+                <span class="text-white font-bold tracking-tight text-xl">
+                    Torres<span class="text-amber-400">Fran</span>
+                </span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#inicio" class="hover:text-amber-400 transition-colors">Inicio</a>
+                <a href="#beneficios" class="hover:text-amber-400 transition-colors">Soluciones</a>
+                <a href="#proyectos" class="hover:text-amber-400 transition-colors">Casos de Éxito</a>
+                <a href="#proceso" class="hover:text-amber-400 transition-colors">Cómo trabajo</a>
+                <a href="#faq" class="hover:text-amber-400 transition-colors">Dudas</a>
+            </div>
+
+            <!-- Botón de WhatsApp Principal -->
+            <a href="https://wa.me/5491134157006?text=Hola%20Fran,%20estoy%20viendo%20tu%20web%20y%20necesito%20consultarte%20por%20un%20sistema" target="_blank" class="relative group overflow-hidden flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-bold rounded-xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(245,158,11,0.4)] active:scale-95 text-sm">
+                <svg class="w-4 h-4 fill-current text-slate-950" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                Escribime
+            </a>
+        </div>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <header id="inicio" class="relative min-h-[85vh] flex flex-col justify-center items-center text-center px-6 pt-32 pb-10 z-10">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-6 border border-amber-500/30 bg-amber-500/10 backdrop-blur-md rounded-full text-amber-300 text-xs font-semibold tracking-wide shadow-lg">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+            Transformación digital para comercios y PyMEs
+        </div>
+        
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight max-w-5xl leading-[1.08] mb-6 text-white">
+            Digitalizá tu negocio y <span class="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-200 bg-clip-text text-transparent">vendé más y mejor</span>.
+        </h1>
+        
+        <p class="text-base sm:text-xl text-slate-300 max-w-2xl font-light leading-relaxed mb-8">
+            Diseño catálogos online profesionales, sistemas de gestión de stock a medida y plataformas de turnos para que ahorres tiempo y tus clientes te elijan más rápido.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md">
+            <a href="https://wa.me/5491134157006?text=Hola%20Fran,%20quiero%20consultarte%20para%20digitalizar%20mi%20negocio" target="_blank" class="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-xl shadow-[0_0_30px_rgba(245,158,11,0.3)] transition-all hover:scale-105 active:scale-95 text-center text-sm">
+                <svg class="w-5 h-5 fill-current text-slate-950" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                Pedir Presupuesto
+            </a>
+            <a href="#proyectos" class="w-full sm:w-auto px-8 py-4 bg-[#141726]/80 hover:bg-[#1c2035] text-white border border-amber-500/20 font-semibold rounded-xl transition-all hover:scale-105 active:scale-95 text-center text-sm backdrop-blur-md">
+                Ver Trabajos Realizados
+            </a>
+        </div>
+    </header>
+
+    <!-- Beneficios / Soluciones -->
+    <section id="beneficios" class="max-w-6xl mx-auto pt-4 pb-16 px-6 relative z-10 reveal">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="spotlight-card p-8 rounded-3xl shadow-2xl">
+                <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-center justify-center text-amber-400 text-xl mb-6 font-bold shadow-inner">⚡</div>
+                <h3 class="text-lg font-bold text-white mb-2">Más clientes desde el celular</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">Páginas ultra rápidas y adaptadas para que tus compradores vean tus productos cómodamente desde el celu y te escriban directamente.</p>
+            </div>
+            <div class="spotlight-card p-8 rounded-3xl shadow-2xl">
+                <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-center justify-center text-amber-400 text-xl mb-6 font-bold shadow-inner">📦</div>
+                <h3 class="text-lg font-bold text-white mb-2">Ordená tu stock y ventas</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">Olvidate de anotar en papel o perder pedidos. Paneles privados intuitivos para controlar precios, mercadería y turnos en un solo lugar.</p>
+            </div>
+            <div class="spotlight-card p-8 rounded-3xl shadow-2xl">
+                <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-center justify-center text-amber-400 text-xl mb-6 font-bold shadow-inner">🤝</div>
+                <h3 class="text-lg font-bold text-white mb-2">Atención cercana y a medida</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">Te escucho, entiendo lo que tu comercio necesita y armo una solución totalmente personalizada, sin intermediarios ni complicaciones.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos / Casos de Éxito -->
+    <section id="proyectos" class="max-w-6xl mx-auto py-20 px-6 relative z-10 reveal">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-xs font-semibold text-amber-400 tracking-[0.2em] uppercase mb-3">Casos de Éxito</h2>
+            <h3 class="text-3xl font-extrabold text-white tracking-tight">Soluciones reales implementadas</h3>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            
+            <!-- Proyecto 1: Librería Salam (Vercel) -->
+            <div class="spotlight-card group rounded-3xl overflow-hidden flex flex-col shadow-2xl">
+                <div class="h-48 bg-amber-950/20 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-all duration-700" alt="Librería Escolar Salam">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0d101a] via-transparent to-transparent"></div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow justify-between relative z-10">
+                    <div>
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs rounded-full font-medium">Librería Escolar</span>
+                            <span class="px-3 py-1 bg-orange-500/10 border border-orange-500/30 text-orange-300 text-xs rounded-full font-medium">Vercel</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Librería Salam</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">Plataforma web desarrollada para librería escolar, optimizada para pedidos rápidos y despliegue en Vercel.</p>
+                    </div>
+                    <a href="https://libreria-salam-libreriasalam.vercel.app/" target="_blank" class="text-amber-400 text-xs font-bold tracking-wider uppercase hover:text-white transition-colors flex items-center gap-1 group-hover:translate-x-1 duration-300">Ver Ejemplo En Vivo →</a>
+                </div>
+            </div>
+
+            <!-- Proyecto 2 -->
+            <div class="spotlight-card group rounded-3xl overflow-hidden flex flex-col shadow-2xl">
+                <div class="h-48 bg-amber-950/20 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-all duration-700" alt="Facundo Barber">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0d101a] via-transparent to-transparent"></div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow justify-between relative z-10">
+                    <div>
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs rounded-full font-medium">Servicios</span>
+                            <span class="px-3 py-1 bg-orange-500/10 border border-orange-500/30 text-orange-300 text-xs rounded-full font-medium">Turnos</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Sistema de Turnos (Barbería/Estética)</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">Página web optimizada para captar clientes y permitirles reservar turnos de forma automatizada.</p>
+                    </div>
+                    <a href="https://facundobarber.vercel.app/" target="_blank" class="text-amber-400 text-xs font-bold tracking-wider uppercase hover:text-white transition-colors flex items-center gap-1 group-hover:translate-x-1 duration-300">Ver Ejemplo En Vivo →</a>
+                </div>
+            </div>
+
+            <!-- Proyecto 3: Pixel-Vault -->
+            <div class="spotlight-card group rounded-3xl overflow-hidden flex flex-col shadow-2xl">
+                <div class="h-48 bg-amber-950/20 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-all duration-700" alt="Pixel Vault">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0d101a] via-transparent to-transparent"></div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow justify-between relative z-10">
+                    <div>
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs rounded-full font-medium">Videojuegos</span>
+                            <span class="px-3 py-1 bg-orange-500/10 border border-orange-500/30 text-orange-300 text-xs rounded-full font-medium">Render</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Pixel-Vault</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">Tienda de videojuegos online con catálogo interactivo y panel de administración en la nube.</p>
+                    </div>
+                    <a href="https://pixel-vault-0rkn.onrender.com/" target="_blank" class="text-amber-400 text-xs font-bold tracking-wider uppercase hover:text-white transition-colors flex items-center gap-1 group-hover:translate-x-1 duration-300">Ver Ejemplo En Vivo →</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Sección: Cómo Trabajamos -->
+    <section id="proceso" class="max-w-6xl mx-auto py-20 px-6 border-t border-amber-500/10 relative z-10 reveal">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-xs font-semibold text-amber-400 tracking-[0.2em] uppercase mb-3">Simple y Sin Vueltas</h2>
+            <h3 class="text-3xl font-extrabold text-white tracking-tight">¿Cómo creamos tu sistema o web?</h3>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="spotlight-card p-8 rounded-3xl relative shadow-2xl">
+                <span class="text-4xl font-extrabold text-amber-500/30 mb-4 block">01</span>
+                <h4 class="text-lg font-bold text-white mb-2">1. Charlamos por WhatsApp</h4>
+                <p class="text-slate-300 text-sm leading-relaxed">Me contás a qué se dedica tu local, qué problemas tenés hoy (stock, ventas, turnos) y te asesoro sobre qué te conviene.</p>
+            </div>
+            <div class="spotlight-card p-8 rounded-3xl relative shadow-2xl">
+                <span class="text-4xl font-extrabold text-amber-500/30 mb-4 block">02</span>
+                <h4 class="text-lg font-bold text-white mb-2">2. Desarrollo a Medida</h4>
+                <p class="text-slate-300 text-sm leading-relaxed">Diseño y programo la plataforma o catálogo adaptado 100% a la identidad de tu negocio, rápido y fácil de usar.</p>
+            </div>
+            <div class="spotlight-card p-8 rounded-3xl relative shadow-2xl">
+                <span class="text-4xl font-extrabold text-amber-500/30 mb-4 block">03</span>
+                <h4 class="text-lg font-bold text-white mb-2">3. ¡Salimos a Vender!</h4>
+                <p class="text-slate-300 text-sm leading-relaxed">Lo ponemos online, te muestro cómo administrarlo desde el celu y empezás a recibir clientes directamente por WhatsApp.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección: Preguntas Frecuentes (FAQ) -->
+    <section id="faq" class="max-w-4xl mx-auto py-20 px-6 relative z-10 reveal">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-xs font-semibold text-amber-400 tracking-[0.2em] uppercase mb-3">Resolvé tus dudas</h2>
+            <h3 class="text-3xl font-extrabold text-white tracking-tight">Preguntas Frecuentes</h3>
+        </div>
+
+        <div class="space-y-4">
+            <details class="spotlight-card p-6 rounded-2xl cursor-pointer group">
+                <summary class="font-bold text-white flex justify-between items-center text-base">
+                    ¿Necesito tener conocimientos técnicos o saber programar?
+                    <span class="text-amber-400 transition-transform group-open:rotate-180 font-mono text-xl">+</span>
+                </summary>
+                <p class="text-slate-300 text-sm mt-4 leading-relaxed font-light">
+                    Para nada. Todo está pensado para que lo manejes con la misma facilidad con la que usás WhatsApp o Instagram desde tu teléfono. Yo te dejo todo configurado y te explico paso a paso.
+                </p>
+            </details>
+
+            <details class="spotlight-card p-6 rounded-2xl cursor-pointer group">
+                <summary class="font-bold text-white flex justify-between items-center text-base">
+                    ¿Cuánto tiempo lleva tener mi web o sistema listo?
+                    <span class="text-amber-400 transition-transform group-open:rotate-180 font-mono text-xl">+</span>
+                </summary>
+                <p class="text-slate-300 text-sm mt-4 leading-relaxed font-light">
+                    Depende del proyecto, pero un catálogo interactivo o una página de turnos optimizada suele estar lista y funcionando en pocos días hábiles desde que definimos los detalles.
+                </p>
+            </details>
+
+            <details class="spotlight-card p-6 rounded-2xl cursor-pointer group">
+                <summary class="font-bold text-white flex justify-between items-center text-base">
+                    ¿Cómo se contactan los clientes conmigo?
+                    <span class="text-amber-400 transition-transform group-open:rotate-180 font-mono text-xl">+</span>
+                </summary>
+                <p class="text-slate-300 text-sm mt-4 leading-relaxed font-light">
+                    Cada producto, servicio o botón clave incluye un acceso directo a tu WhatsApp con el mensaje ya armado (por ejemplo: "Hola, quiero encargar este producto..."), facilitando la venta directa sin intermediarios.
+                </p>
+            </details>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="max-w-4xl mx-auto px-6 py-16 relative z-10 reveal">
+        <div class="spotlight-card bg-gradient-to-br from-amber-950/40 via-[#121624] to-[#0d101a] border border-amber-500/30 p-10 md:p-14 rounded-3xl shadow-2xl text-center relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-amber-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+            <div class="relative z-10">
+                <h2 class="text-2xl md:text-3xl font-extrabold mb-4 text-white">¿Querés llevar tu comercio al siguiente nivel digital?</h2>
+                <p class="text-slate-300 text-sm md:text-base max-w-xl mx-auto mb-8 font-light">Escribime un mensaje por WhatsApp y charlemos sobre lo que necesita tu local. Te asesoro sin compromiso.</p>
+                <a href="https://wa.me/5491134157006?text=Hola%20Fran,%20quiero%20consultarte%20para%20crear%20una%20web%20o%20sistema%20para%20mi%20negocio" target="_blank" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-amber-400 text-slate-950 font-bold rounded-xl shadow-[0_0_30px_rgba(245,158,11,0.3)] hover:bg-amber-300 transition-all hover:scale-105 active:scale-95 uppercase tracking-wider text-sm">
+                    <svg class="w-5 h-5 fill-current text-slate-950" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                    Contactar por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-amber-500/10 text-center relative z-10">
+        <p class="text-slate-400 text-xs tracking-widest uppercase">
+            Torres Fran &copy; 2026 // Soluciones Web y Digitales para Negocios
+        </p>
+    </footer>
+
+    <!-- Script de Animaciones y Efectos -->
+    <script>
+        // Intersection Observer para animaciones de scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Spotlight Dinámico para seguir el cursor en las tarjetas
+        document.querySelectorAll('.spotlight-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            });
+        });
+    </script>
+
+</body>
+</html>
